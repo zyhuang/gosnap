@@ -1,0 +1,61 @@
+#!/bin/bash -e
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#
+#    Copyright  2015  Fuli Yu's group at Baylor College of Medicine
+#
+#    Author:  Zhuoyi Huang <zhuoyih@bcm.edu>
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+#
+#    Last modified:  05/06/2015
+#
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+bam=$1
+ebd=$(basename $bam).ebd	# in current dir
+ebi=$(basename $bam).ebi	# in current dir
+pulog=$(basename $bam).pulog	# in current dir
+
+n=$(/usr/bin/samtools/samtools view $bam | head -n 1 | wc -l)
+
+if [ $n -ne 1 ]; then
+	echo "*WARNING*: $bam has no coverage, skip pileup"
+	touch $bam.empty
+	exit
+fi
+
+ebdsize=0
+retry=0
+while [ $ebdsize -eq 0 ] && [ $retry -lt 100 ]; do
+	echo "[pileup.xargs] /usr/bin/snptools/pileup $bam &> $pulog (retry = $retry)"
+	/usr/bin/snptools/pileup $bam &> $pulog 
+	ebdsize=$(du -s $ebd | cut -f 1)
+	retry=$[retry+1]
+done
+
+if [ ! -f $ebd ] || [ ! -f $ebi ]; then
+	echo "*ERROR*: failed to pileup $bam"
+	exit 1
+fi
+
+ebdsize=$(du -s $ebd | cut -f 1)
+if [ $ebdsize -eq 0 ]; then
+	echo "*WARNING*: output EBD $ebd is empty (after 100 retries, give up)."
+	rm $ebd $ebi
+	touch $bam.empty
+	exit 0
+fi
+ 
+

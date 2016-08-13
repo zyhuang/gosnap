@@ -1,0 +1,107 @@
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//
+//    Copyright  2015  Fuli Yu's group at Baylor College of Medicine
+//
+//    Author:  Zhuoyi Huang <zhuoyih@bcm.edu>
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+//
+//    Last modified:  05/06/2015
+//
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+{
+    "name": "gosnap",
+    "title": "goSNAP Variant Calling",
+    "summary": "Variant calling using SNPTools, GotCloud, GATK-GVCF and GATK-UG",
+    "dxapi": "1.0.0",
+    "version": "1.0.0",
+    "categories": [ "Variation Calling" ],
+
+    "inputSpec": [
+	{
+	    "name": "dxSliceBamTar",
+	    "class": "file",
+	    "optional": false
+	},
+	{
+	    "name": "dxRefGenTar",
+	    "class": "file",
+	    "optional": false
+	},
+	{
+	    "name": "dxRefGenChrTar",
+	    "class": "file",
+	    "optional": false
+	}
+    ],
+
+    "outputSpec": [
+	{
+	    "name": "snptoolsVcfTar",
+	    "class": "file",
+	    "optional": true
+	},
+	{
+	    "name": "snptoolsByprodTar",
+	    "class": "file",
+	    "optional": true
+	},
+	{
+	    "name": "gotcloudVcfTar",
+	    "class": "file",
+	    "optional": true
+	},
+	{
+	    "name": "gotcloudByprodTar",
+	    "class": "file",
+	    "optional": true
+	},
+	{
+	    "name": "gatkgvcfVcfTar",
+	    "class": "file",
+	    "optional": true
+	},
+	{
+	    "name": "gatkgvcfByprodTar",
+	    "class": "file",
+	    "optional": true
+
+	},
+	{
+	    "name": "gatkugVcfTar",
+	    "class": "file",
+	    "optional": true
+	}
+    ],
+
+    "runSpec": {
+	"interpreter": "bash",
+	"file": "src/run.sh",
+	"execDepends": [
+	    {
+		"name": "openjdk-7-jre"
+	    },
+	    {
+		"name": "python3.2"	
+	    }
+	]
+    },
+
+    "access": {
+	"project": "VIEW",
+	"allProjects": "VIEW",
+	"network": [ "*" ]
+    }
+}

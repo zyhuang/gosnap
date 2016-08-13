@@ -24,7 +24,7 @@ Given the path to the input tarball of BAM files located in a DNAnexus project, 
 ```bash
 dx run $dx_project_name:$path_to_install/gosnap -idxSliceBamTar=$dx_data_project:$path_to_bam_data/sliced_bams.tar.gz -idxRefGenTar=$dx_data_project:$path_to_ref_gen/ref_fasta.tar.gz
 ```
-The outputs files are configured in the JSON file ``dnanexus/gosnap.ap/dxapp.json`` (defined with ``outputSpec`` key).
+The outputs files are configured in the JSON file ``dnanexus/gosnap.app/dxapp.json`` (defined with ``outputSpec`` key).
 
 
 
@@ -40,7 +40,7 @@ goSNAP was developed by Zhuoyi Huang, designed by Fuli Yu, Zhuoyi Huang and Navi
 ## License
 
 For non-commercial use, goSNAP is released under Apache 2.0 License.
-For commercial use, please contact [Fuli Yu] (for details see ``LICENSE``).
+For commercial use, please contact [Fuli Yu]. Please see ``LICENSE`` for details.
 
 [Fuli Yu]: fyu@bcm.edu
 

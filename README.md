@@ -52,7 +52,9 @@ DNAnexus version of goSNAP package (including the slice and repack pre-reduction
 ## How to cite
 
 Zhuoyi Huang, Navin Rustagi, Narayanan Veeraraghavan, Andrew Carroll, Richard Gibbs, Eric Boerwinkle, Manjunath Gorentla Venkata, Fuli Yu.
-*A hybrid computational strategy to address WGS variant analysis in >5000 samples.* [BMC Bioinformatics 2016, ??:???]
+*A hybrid computational strategy to address WGS variant analysis in >5000 samples.* [[BMC Bioinformatics 17 (1), 361]]
+
+[BMC Bioinformatics 17 (1), 361]: http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1211-6
 
 
 ## References
